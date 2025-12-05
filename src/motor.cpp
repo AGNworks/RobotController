@@ -34,3 +34,15 @@ void Motor::MoveBackward(int speed) {
     analogWrite(leftPWM, currentSpeed);
     analogWrite(rightPWM, 0);
 }
+
+/**
+ * Set the speed and direction of the motor
+ */
+void Motor::SetSpeed(int dir, int speed) {
+    if (dir == 0) {
+        MoveForward(speed);
+    }
+    else {
+        MoveBackward(speed);
+    }
+}

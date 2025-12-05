@@ -8,7 +8,7 @@ using namespace Config;
  * Set up the Serial communication
  */
 void Communication::CommSetup() {
-    Serial.begin(Config::Comm::BAUD_RATE);
+    Serial.begin(Comm::BAUD_RATE);
 }
 
 /**
@@ -21,15 +21,22 @@ void Communication::SendMsg(String msg) {
 /**
  * Check for input message from "brain"
  */
-void Communication::CheckInput() {
-    byte motor_values[2];
+MotorValues Communication::CheckInput() {
+    MotorValues robot_values;
     // Check for input message
     if (Serial.available() >= Comm::EXPECTED_BYTES) {
         if (Serial.read() == Comm::MSG_START) {
-            for (int i = 0; i < Comm::EXPECTED_BYTES-1; i++) {
-                motor_values[i] = Serial.read();
-            }
-        SendMsg("Set speeds M1: " + String(motor_values[0]) + " M2: " + String(motor_values[1]));
+            robot_values.m1_dir = Serial.read();
+            robot_values.m1_speed = Serial.read();
+            robot_values.m2_dir = Serial.read();
+            robot_values.m2_speed = Serial.read();
+            robot_values.valid = true;
         }
+        SendMsg("M1 dir: " + String(robot_values.m1_dir) +
+                " M1 s: " + String(robot_values.m1_speed) +
+                " M2 dir: " + String(robot_values.m2_dir) +
+                " M2 s: " + String(robot_values.m2_speed));
     }
+    else {robot_values.valid = false;}
+    return robot_values;
 }

@@ -16,6 +16,7 @@ class Motor {
         void MotorSetup(int L_PWM, int R_PWM);
         void MoveForward(int speed);
         void MoveBackward(int speed);
+        void SetSpeed(int dir, int speed);
 };
 
 #endif

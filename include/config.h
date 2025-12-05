@@ -22,7 +22,7 @@ namespace Config {
     namespace Comm {
         const unsigned long BAUD_RATE = 115200;
         const unsigned long TIMEOUT = 1000;
-        const int EXPECTED_BYTES = 3;  // Start sing + 2 motor speeds
+        const int EXPECTED_BYTES = 5;  // Start sing + 2 motor speeds
         const int MSG_START = 0xAA;
 
     }

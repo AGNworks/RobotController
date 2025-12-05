@@ -2,31 +2,22 @@
 Main file for this project.
 Controlling two motors with PWM signals from an Arduino Mega board.
 */
-#include "communication.h"
-#include "config.h"
-#include "motor.h"
+#include "main_process.h"
 
-
-// Create the classs instances
-Communication myComm;
-Motor leftMotor;
-Motor rightMotor;
+// Create the Process
+MainProcess Process;
 
 // Setup up
 void setup() {
-    // Set up the communication channel
-    myComm.CommSetup();
-
-    // Create the motor instances
-    leftMotor.MotorSetup(Config::Pins::PWM_PIN_1, Config::Pins::PWM_PIN_2);
-    rightMotor.MotorSetup(Config::Pins::PWM_PIN_3, Config::Pins::PWM_PIN_4);
-
+    // Setup up Process
+    Process.SetProcess();
     // Information
-    myComm.SendMsg("Control motors");
+    Process.MyComm.SendMsg("Control motors");
 }
 
 
 // Main loop
 void loop() {
-    myComm.CheckInput();
+    // Check input msg
+    Process.CheckInput();
 }
