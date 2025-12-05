@@ -28,4 +28,5 @@ void setup() {
 
 // Main loop
 void loop() {
+    myComm.CheckInput();
 }

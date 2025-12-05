@@ -13,33 +13,23 @@ namespace Config {
 
     // Motor Parameters
     namespace Motor {
-        const int DEFAULT_ID = 1;
         const int MAX_SPEED = 255;
         const int MIN_SPEED = 30;
         const int RAMP_RATE = 5;  // Speed change per step
-
-        // PID Constants (if using closed-loop control)
-        namespace PID {
-            const float KP = 1.0;
-            const float KI = 0.1;
-            const float KD = 0.05;
-            const int UPDATE_INTERVAL = 10;  // ms
-        }
     }
 
     // Communication
     namespace Comm {
         const unsigned long BAUD_RATE = 115200;
         const unsigned long TIMEOUT = 1000;
-        const unsigned long HEARTBEAT = 500;
-        const int BUFFER_SIZE = 64;
+        const int EXPECTED_BYTES = 3;  // Start sing + 2 motor speeds
+        const int MSG_START = 0xAA;
+
     }
 
     // System
     namespace System {
         const unsigned long LOOP_DELAY = 10;  // ms
-        const bool SAFETY_ENABLED = true;
-        const bool LOGGING_ENABLED = true;
     }
 }
 
